@@ -26,81 +26,29 @@
  *
  * For more information, please refer to <http://unlicense.org/> */
 
-#ifndef SHEREDOM_UTF8_H_INCLUDED
-#define SHEREDOM_UTF8_H_INCLUDED
-
-#if defined(_MSC_VER)
-#pragma warning(push)
-
-/* disable warning: no function prototype given: converting '()' to '(void)' */
-#pragma warning(disable : 4255)
-
-/* disable warning: '__cplusplus' is not defined as a preprocessor macro,
- * replacing with '0' for '#if/#elif' */
-#pragma warning(disable : 4668)
-
-/* disable warning: bytes padding added after construct */
-#pragma warning(disable : 4820)
-#endif
+#ifndef NOURSED_SHEREDOM_UTF8_H_INCLUDED
+#define NOURSED_SHEREDOM_UTF8_H_INCLUDED
 
 #include <stddef.h>
 #include <stdlib.h>
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
-
-#if defined(_MSC_VER) && (_MSC_VER < 1920)
-typedef __int32 utf8_int32_t;
-#else
 #include <stdint.h>
+
 typedef int32_t utf8_int32_t;
-#endif
+typedef char utf8_int8_t;
 
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wold-style-cast"
-#pragma clang diagnostic ignored "-Wcast-qual"
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if defined(_MSC_VER)
-#define utf8_nonnull
-#define utf8_pure
-#define utf8_restrict __restrict
-#define utf8_weak __inline
-#elif defined(__clang__) || defined(__GNUC__)
+#if defined(__clang__) || defined(__GNUC__)
 #define utf8_nonnull __attribute__((nonnull))
 #define utf8_pure __attribute__((pure))
 #define utf8_restrict __restrict__
 #define utf8_weak __attribute__((weak))
 #else
-#error Non clang, non gcc, non MSVC compiler found!
+#error Non clang, non gcc compiler found!
 #endif
 
-#ifdef __cplusplus
-#define utf8_null NULL
-#else
 #define utf8_null 0
-#endif
-
-#if (defined(__cplusplus) && __cplusplus >= 201402L)
-#define utf8_constexpr14 constexpr
-#define utf8_constexpr14_impl constexpr
-#else
 /* constexpr and weak are incompatible. so only enable one of them */
 #define utf8_constexpr14 utf8_weak
 #define utf8_constexpr14_impl
-#endif
-
-#if defined(__cplusplus) && __cplusplus >= 202002L
-using utf8_int8_t = char8_t; /* Introduced in C++20 */
-#else
-typedef char utf8_int8_t;
-#endif
 
 /* Return less than 0, 0, greater than 0 if src1 < src2, src1 == src2, src1 >
  * src2 respectively, case insensitive. */
@@ -1671,12 +1619,4 @@ utf8rcodepoint(const utf8_int8_t *utf8_restrict str,
 #undef utf8_constexpr14
 #undef utf8_null
 
-#ifdef __cplusplus
-} /* extern "C" */
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif
-
-#endif /* SHEREDOM_UTF8_H_INCLUDED */
+#endif /* NOURSED_SHEREDOM_UTF8_H_INCLUDED */

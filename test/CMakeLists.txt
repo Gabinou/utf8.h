@@ -62,32 +62,32 @@ elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
   endif()
 endif()
 
-add_executable(utf8_test_cpp11 test.cpp)
-set_target_properties(utf8_test_cpp11 PROPERTIES CXX_STANDARD 11)
+# add_executable(utf8_test_cpp11 test.cpp)
+# set_target_properties(utf8_test_cpp11 PROPERTIES CXX_STANDARD 11)
 
-add_executable(utf8_test_cpp14 test.cpp)
-set_target_properties(utf8_test_cpp14 PROPERTIES CXX_STANDARD 14)
+# add_executable(utf8_test_cpp14 test.cpp)
+# set_target_properties(utf8_test_cpp14 PROPERTIES CXX_STANDARD 14)
 
-add_executable(utf8_test_cpp17 test.cpp)
-set_target_properties(utf8_test_cpp17 PROPERTIES CXX_STANDARD 17)
+# add_executable(utf8_test_cpp17 test.cpp)
+# set_target_properties(utf8_test_cpp17 PROPERTIES CXX_STANDARD 17)
 
-add_executable(utf8_test_cpp20 test.cpp)
-set_target_properties(utf8_test_cpp20 PROPERTIES CXX_STANDARD 20)
+# add_executable(utf8_test_cpp20 test.cpp)
+# set_target_properties(utf8_test_cpp20 PROPERTIES CXX_STANDARD 20)
 
 if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
-  set_source_files_properties(test.c test.cpp PROPERTIES
+  set_source_files_properties(test.c PROPERTIES
     COMPILE_FLAGS "-Wall -Wextra -Werror"
   )
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
-  set_source_files_properties(test.c test.cpp PROPERTIES
+  set_source_files_properties(test.c PROPERTIES
     COMPILE_FLAGS "-Wall -Wextra -Weverything -Werror -Wno-c++98-compat"
   )
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
-  set_source_files_properties(test.c test.cpp PROPERTIES
+  set_source_files_properties(test.c PROPERTIES
     COMPILE_FLAGS "/Wall /WX /wd4514"
   )
   if(${MSVC_VERSION} VERSION_GREATER "15.7")
-    set_source_files_properties(test.c test.cpp PROPERTIES
+    set_source_files_properties(test.c PROPERTIES
         COMPILE_FLAGS "/Zc:__cplusplus"
         )
   endif()
